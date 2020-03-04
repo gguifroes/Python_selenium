@@ -1,0 +1,36 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Sep 24 14:21:34 2019
+
+@author: ErnandoM/GuilhermeF
+"""
+from numpy import genfromtxt
+
+class arquivo_class:
+#    Contrutor
+    def __init__(self,diretorio,arquivo_ler,arquivo_escreve):
+        self.diretorio = diretorio
+        self.arquivo_ler = arquivo_ler
+        self.arquivo_escreve = arquivo_escreve
+    
+#    Leitura do arquivo com as informações a serem processadas
+    def ler_arquivo(self):
+        print(self.diretorio + "\\" + self.arquivo_ler)
+        dados = genfromtxt(self.diretorio + "\\" + self.arquivo_ler, delimiter=';',dtype=str )
+        return dados
+    
+#    Log para falha no processo de criação
+    def log(self,info):
+        try:            
+            arquivo = open(self.diretorio + "\\" + self.arquivo_escreve, 'r') # Abra o arquivo (leitura)
+            conteudo = arquivo.readlines()
+            conteudo.append(info + ' não processado. \n')   # insira seu conteúdo
+            
+            arquivo = open(self.diretorio + "\\" + self.arquivo_escreve , 'w') # Abre novamente o arquivo (escrita)
+            arquivo.writelines(conteudo)    # escreva o conteúdo criado anteriormente nele.
+            
+            arquivo.close()
+        except:
+            arquivo = open(self.diretorio + "\\" + self.arquivo_escreve , 'w') # Abre novamente o arquivo (escrita)
+            arquivo.writelines(info + ' não processado. \n' )
+            arquivo.close()
