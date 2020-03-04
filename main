@@ -1,0 +1,91 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Sep 24 14:32:08 2019
+
+@author: ErnandoM/GuilhermeF
+"""
+# =============================================================================#
+#                                   Main                                       #  
+# =============================================================================#
+
+from selenium import webdriver
+from workfile import arquivo_class
+from workpages import works
+
+
+#Parametros
+pageLogin = "https://impl.workday.com/fedex/d/home.htmld"
+chromedriver = 'C:\\Users\guilhermesf\drivers\chromedriver.exe'
+change_job = 'https://impl.workday.com/fedex/d/task/2997$4819.htmld'
+diretorio = 'C:\\Users\guilhermesf\Desktop'
+arquivo_ler = 'Base_func.csv'
+arquivo_escreve = 'log.csv'
+
+
+
+#Propriedades do Navegador
+options = webdriver.ChromeOptions()
+browser = webdriver.Chrome(executable_path=chromedriver, chrome_options=options)
+
+#Realiza login
+works.login_workday(5236042,'Year3030',pageLogin,browser)
+
+
+# =============================================================================#
+#                                   Change Job                                 #  
+# =============================================================================#
+
+#Leitura do arquivo
+arq= arquivo_class(diretorio,arquivo_ler,arquivo_escreve)
+
+processo = works.job_change(browser,change_job,'131009' ,'ernando' ,'09/01/2019', '317267','317267','CPQT8')
+
+#for dados in  arq.ler_arquivo():
+#    idfedex = dados[0]
+#    nome = 'ernando'
+#    data = dados[1]
+#    gestor = dados[2]
+#    equipe = dados[3]
+#    local = dados[4]
+#
+#    processo = works.job_change(browser,change_job,idfedex ,nome ,data, gestor,equipe,'CPQT8')
+#    
+#    if processo == 'ok':
+#        print(idfedex +': Finalizado.')
+#    else:
+#        print(idfedex +': Erro ao processar')
+#        arq.log(idfedex + ';' + nome + ';' + data + ';' + gestor + ';' + equipe)
+#
+
+
+
+
+
+
+#to do
+#dados = funcao arquivo(arquivo)
+#for d in dados:
+#    if d.tipo_dados = 1: #change job
+#        job_change(d.va1, d.val2,.d.va3)
+#        
+#    elif d.tipo_dados = 2: #desligamento
+#        desligamento(1,2,3,5)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
